@@ -23,6 +23,11 @@ const jobsRouter = require('./routes/jobs');
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
+// API home route
+app.get('/', (req, res) => {
+  res.send('Hurray!!! - api is up!!!');
+});
+
 // express middleware for handling json data in post-requests
 app.use(express.json());
 
