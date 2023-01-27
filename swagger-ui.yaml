@@ -1,0 +1,239 @@
+openapi: 3.0.0
+info:
+  title: Jobs API project
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://jobs-api-project.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: registerUser
+      operationId: registerUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/registerUserRequest'
+                - example:
+                    name: andrew
+                    email: andrew@gmail.com
+                    password: andrew
+            example:
+              name: andrew
+              email: andrew@gmail.com
+              password: andrew
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: loginUser
+      operationId: loginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/loginUserRequest'
+                - example:
+                    email: andrew@gmail.com
+                    password: andrew
+            example:
+              email: andrew@gmail.com
+              password: andrew
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+        - jobs
+      summary: createJob
+      operationId: createJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/createJobRequest'
+                - example:
+                    company: Heroku
+                    position: cloud engineer
+            example:
+              company: Heroku
+              position: cloud engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - jobs
+      summary: getAllJobs
+      operationId: getAllJobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - jobs
+      summary: getSingleJob
+      operationId: getSingleJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - jobs
+      summary: updateJob
+      operationId: updateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/updateJobRequest'
+                - example:
+                    company: Heroku USA
+                    position: cloud engineer(senior)
+            example:
+              company: Heroku USA
+              position: cloud engineer(senior)
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - jobs
+      summary: deleteJob
+      operationId: deleteJob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    registerUserRequest:
+      title: registerUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: andrew
+        email: andrew@gmail.com
+        password: andrew
+    loginUserRequest:
+      title: loginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: andrew@gmail.com
+        password: andrew
+    createJobRequest:
+      title: createJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Heroku
+        position: cloud engineer
+    updateJobRequest:
+      title: updateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Heroku USA
+        position: cloud engineer(senior)
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: auth
+    description: ''
+  - name: jobs
+    description: ''
