@@ -1,0 +1,293 @@
+{
+	"info": {
+		"_postman_id": "bafa30b2-975e-4522-b90f-63bb4e5d3efc",
+		"name": "Jobs API project (production)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25201008"
+	},
+	"item": [
+		{
+			"name": "registerUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsonData.token)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"andrew\", \"email\": \"andrew@gmail.com\", \"password\": \"andrew\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/auth/register",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "loginUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData = pm.response.json()\r",
+							"pm.globals.set(\"accessToken\", jsonData.token)\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\": \"andrew@gmail.com\", \"password\" : \"andrew\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/auth/login",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2QyNzE4MTRmMjlhNjBlN2M4NjZkNmQiLCJuYW1lIjoiQW5uYSIsImlhdCI6MTY3NDczNjAwMiwiZXhwIjoxNjc3MzI4MDAyfQ.3iQNMxn9w9GBG_YQB-x9YnNuEQY0o__XUDLfgMX7OUk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"company\":\"Heroku\", \"position\": \"cloud engineer\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/jobs",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllJobs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2QyNzE4MTRmMjlhNjBlN2M4NjZkNmQiLCJuYW1lIjoiQW5uYSIsImlhdCI6MTY3NDczNjAwMiwiZXhwIjoxNjc3MzI4MDAyfQ.3iQNMxn9w9GBG_YQB-x9YnNuEQY0o__XUDLfgMX7OUk",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/jobs",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSingleJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/jobs/63d2baf27395fb4a903034a3",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"jobs",
+						"63d2baf27395fb4a903034a3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"company\":\"Heroku USA\", \"position\": \"cloud engineer(senior)\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/jobs/63d2b9517395fb4a9030349c",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"jobs",
+						"63d2b9517395fb4a9030349c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteJob",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{jobs-api-project_prod-url}}/jobs/63d2b9517395fb4a9030349c",
+					"host": [
+						"{{jobs-api-project_prod-url}}"
+					],
+					"path": [
+						"jobs",
+						"63d2b9517395fb4a9030349c"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
